@@ -11,6 +11,7 @@
   iterator_types = ["parallel", "parallel", "reduction"]
 }
 
+// for memref operand types 
 func.func @_matmul(%tensor1: memref<?x?xf64>, %tensor2: memref<?x?xf64>, %tensor3: memref<?x?xf64>) -> ()  {
   %0 = arith.constant 0.0 : f64
   linalg.fill ins(%0 : f64) outs(%tensor3: memref<?x?xf64>)
@@ -24,6 +25,7 @@ func.func @_matmul(%tensor1: memref<?x?xf64>, %tensor2: memref<?x?xf64>, %tensor
   return
 }
 
+// for tensor operand types. Needs bufferize transform before affine transform can be applied
 func.func @matmul(%tensor1: tensor<?x?xf64>, %tensor2: tensor<?x?xf64>) -> tensor<?x?xf64>  {
   %0 = arith.constant 0 : index
   %1 = arith.constant 1 : index
